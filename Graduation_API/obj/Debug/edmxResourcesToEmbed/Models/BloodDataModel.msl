@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BloodDonor_APIModelStoreContainer" CdmEntityContainer="BloodDonor_APIEntities1">
+    <EntitySetMapping Name="BDF_UserRole">
+      <EntityTypeMapping TypeName="BloodDonor_APIModel.BDF_UserRole">
+        <MappingFragment StoreEntitySet="BDF_UserRole">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="BloodDonor_APIModel.Question">
+        <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="receiverRole" ColumnName="receiverRole" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="User_Question" ColumnName="User_Question" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BDF_BloodRequest">
+      <EntityTypeMapping TypeName="BloodDonor_APIModel.BDF_BloodRequest">
+        <MappingFragment StoreEntitySet="BDF_BloodRequest">
+          <ScalarProperty Name="IsOperationDone" ColumnName="IsOperationDone" />
+          <ScalarProperty Name="RequestType" ColumnName="RequestType" />
+          <ScalarProperty Name="No_Of_Days" ColumnName="No_Of_Days" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ReqDate" ColumnName="ReqDate" />
+          <ScalarProperty Name="AppDate" ColumnName="AppDate" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="BloodRequireAddress" ColumnName="BloodRequireAddress" />
+          <ScalarProperty Name="ReceiverAccount_id" ColumnName="ReceiverAccount_id" />
+          <ScalarProperty Name="SenderAccount_id" ColumnName="SenderAccount_id" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicalReport_Images">
+      <EntityTypeMapping TypeName="BloodDonor_APIModel.MedicalReport_Images">
+        <MappingFragment StoreEntitySet="MedicalReport_Images">
+          <ScalarProperty Name="MedicalReport_Status" ColumnName="MedicalReport_Status" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BDF_UserAccount">
+      <EntityTypeMapping TypeName="BloodDonor_APIModel.BDF_UserAccount">
+        <MappingFragment StoreEntitySet="BDF_UserAccount">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BDF_UserProfile">
+      <EntityTypeMapping TypeName="BloodDonor_APIModel.BDF_UserProfile">
+        <MappingFragment StoreEntitySet="BDF_UserProfile">
+          <ScalarProperty Name="MedicalReport_ImgURL" ColumnName="MedicalReport_ImgURL" />
+          <ScalarProperty Name="city_name" ColumnName="city_name" />
+          <ScalarProperty Name="govern_name" ColumnName="govern_name" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="DonationFrequency" ColumnName="DonationFrequency" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserProfileID" ColumnName="UserProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfile_Images">
+      <EntityTypeMapping TypeName="BloodDonor_APIModel.UserProfile_Images">
+        <MappingFragment StoreEntitySet="UserProfile_Images">
+          <ScalarProperty Name="ImageSize" ColumnName="ImageSize" />
+          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

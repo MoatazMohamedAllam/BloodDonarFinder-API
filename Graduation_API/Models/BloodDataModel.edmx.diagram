@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf7a4dd620214372b3aef2e31f6058a4" Name="Diagram1">
+        <EntityTypeShape EntityType="BloodDonor_APIModel.BDF_UserRole" Width="1.5" PointX="0.5" PointY="2.125" />
+        <EntityTypeShape EntityType="BloodDonor_APIModel.Question" Width="1.5" PointX="8.75" PointY="5" />
+        <EntityTypeShape EntityType="BloodDonor_APIModel.BDF_BloodRequest" Width="1.5" PointX="6" PointY="1.5" />
+        <EntityTypeShape EntityType="BloodDonor_APIModel.MedicalReport_Images" Width="1.5" PointX="6.75" PointY="11.125" />
+        <EntityTypeShape EntityType="BloodDonor_APIModel.BDF_UserAccount" Width="1.5" PointX="2.75" PointY="1.75" />
+        <AssociationConnector Association="BloodDonor_APIModel.FK_BDF_UserAccount_BDF_UserRole" />
+        <EntityTypeShape EntityType="BloodDonor_APIModel.BDF_UserProfile" Width="1.5" PointX="5" PointY="14.5" />
+        <AssociationConnector Association="BloodDonor_APIModel.FK_BDF_BloodRequest_BDF_UserProfile" />
+        <AssociationConnector Association="BloodDonor_APIModel.FK_BDF_BloodRequest_BDF_UserProfile1" />
+        <AssociationConnector Association="BloodDonor_APIModel.FK_BDF_UserProfile_BDF_UserAccount" />
+        <AssociationConnector Association="BloodDonor_APIModel.FK_MedicalReport_Images_BDF_UserProfile" />
+        <AssociationConnector Association="BloodDonor_APIModel.FK_Questions_BDF_UserProfile" />
+        <EntityTypeShape EntityType="BloodDonor_APIModel.UserProfile_Images" Width="1.5" PointX="7.25" PointY="15.875" />
+        <AssociationConnector Association="BloodDonor_APIModel.FK_UserProfile_Image_BDF_UserProfile" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

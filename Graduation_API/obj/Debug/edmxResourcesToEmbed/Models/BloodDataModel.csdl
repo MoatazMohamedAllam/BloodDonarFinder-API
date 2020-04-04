@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BloodDonor_APIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BloodDonor_APIEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BDF_UserRole" EntityType="BloodDonor_APIModel.BDF_UserRole" />
+    <EntitySet Name="Questions" EntityType="BloodDonor_APIModel.Question" />
+    <EntitySet Name="BDF_BloodRequest" EntityType="BloodDonor_APIModel.BDF_BloodRequest" />
+    <EntitySet Name="MedicalReport_Images" EntityType="BloodDonor_APIModel.MedicalReport_Images" />
+    <EntitySet Name="BDF_UserAccount" EntityType="BloodDonor_APIModel.BDF_UserAccount" />
+    <AssociationSet Name="FK_BDF_UserAccount_BDF_UserRole" Association="BloodDonor_APIModel.FK_BDF_UserAccount_BDF_UserRole">
+      <End Role="BDF_UserRole" EntitySet="BDF_UserRole" />
+      <End Role="BDF_UserAccount" EntitySet="BDF_UserAccount" />
+    </AssociationSet>
+    <EntitySet Name="BDF_UserProfile" EntityType="BloodDonor_APIModel.BDF_UserProfile" />
+    <AssociationSet Name="FK_BDF_BloodRequest_BDF_UserProfile" Association="BloodDonor_APIModel.FK_BDF_BloodRequest_BDF_UserProfile">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="BDF_BloodRequest" EntitySet="BDF_BloodRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BDF_BloodRequest_BDF_UserProfile1" Association="BloodDonor_APIModel.FK_BDF_BloodRequest_BDF_UserProfile1">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="BDF_BloodRequest" EntitySet="BDF_BloodRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BDF_UserProfile_BDF_UserAccount" Association="BloodDonor_APIModel.FK_BDF_UserProfile_BDF_UserAccount">
+      <End Role="BDF_UserAccount" EntitySet="BDF_UserAccount" />
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalReport_Images_BDF_UserProfile" Association="BloodDonor_APIModel.FK_MedicalReport_Images_BDF_UserProfile">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="MedicalReport_Images" EntitySet="MedicalReport_Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_BDF_UserProfile" Association="BloodDonor_APIModel.FK_Questions_BDF_UserProfile">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <EntitySet Name="UserProfile_Images" EntityType="BloodDonor_APIModel.UserProfile_Images" />
+    <AssociationSet Name="FK_UserProfile_Image_BDF_UserProfile" Association="BloodDonor_APIModel.FK_UserProfile_Image_BDF_UserProfile">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="UserProfile_Images" EntitySet="UserProfile_Images" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BDF_UserRole">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BDF_UserAccount" Relationship="BloodDonor_APIModel.FK_BDF_UserAccount_BDF_UserRole" FromRole="BDF_UserRole" ToRole="BDF_UserAccount" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="User_Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="receiverRole" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BDF_UserProfile" Relationship="BloodDonor_APIModel.FK_Questions_BDF_UserProfile" FromRole="Question" ToRole="BDF_UserProfile" />
+  </EntityType>
+  <EntityType Name="BDF_BloodRequest">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SenderAccount_id" Type="Int64" />
+    <Property Name="ReceiverAccount_id" Type="Int64" />
+    <Property Name="BloodRequireAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AppDate" Type="DateTime" Precision="0" />
+    <Property Name="ReqDate" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="No_Of_Days" Type="Int32" />
+    <Property Name="RequestType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsOperationDone" Type="Boolean" />
+    <NavigationProperty Name="BDF_UserProfile" Relationship="BloodDonor_APIModel.FK_BDF_BloodRequest_BDF_UserProfile" FromRole="BDF_BloodRequest" ToRole="BDF_UserProfile" />
+    <NavigationProperty Name="BDF_UserProfile1" Relationship="BloodDonor_APIModel.FK_BDF_BloodRequest_BDF_UserProfile1" FromRole="BDF_BloodRequest" ToRole="BDF_UserProfile" />
+  </EntityType>
+  <EntityType Name="MedicalReport_Images">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfileID" Type="Int64" />
+    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MedicalReport_Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BDF_UserProfile" Relationship="BloodDonor_APIModel.FK_MedicalReport_Images_BDF_UserProfile" FromRole="MedicalReport_Images" ToRole="BDF_UserProfile" />
+  </EntityType>
+  <EntityType Name="BDF_UserAccount">
+    <Key>
+      <PropertyRef Name="AccountID" />
+    </Key>
+    <Property Name="AccountID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RoleID" Type="Byte" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BDF_UserRole" Relationship="BloodDonor_APIModel.FK_BDF_UserAccount_BDF_UserRole" FromRole="BDF_UserAccount" ToRole="BDF_UserRole" />
+    <NavigationProperty Name="BDF_UserProfile" Relationship="BloodDonor_APIModel.FK_BDF_UserProfile_BDF_UserAccount" FromRole="BDF_UserAccount" ToRole="BDF_UserProfile" />
+  </EntityType>
+  <Association Name="FK_BDF_UserAccount_BDF_UserRole">
+    <End Type="BloodDonor_APIModel.BDF_UserRole" Role="BDF_UserRole" Multiplicity="0..1" />
+    <End Type="BloodDonor_APIModel.BDF_UserAccount" Role="BDF_UserAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserRole">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="BDF_UserAccount">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BDF_UserProfile">
+    <Key>
+      <PropertyRef Name="UserProfileID" />
+    </Key>
+    <Property Name="UserProfileID" Type="Int64" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DonationFrequency" Type="Int32" />
+    <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="BloodGroup" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="User_Id" Type="Int64" Nullable="false" />
+    <Property Name="govern_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="city_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MedicalReport_ImgURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BDF_BloodRequest" Relationship="BloodDonor_APIModel.FK_BDF_BloodRequest_BDF_UserProfile" FromRole="BDF_UserProfile" ToRole="BDF_BloodRequest" />
+    <NavigationProperty Name="BDF_BloodRequest1" Relationship="BloodDonor_APIModel.FK_BDF_BloodRequest_BDF_UserProfile1" FromRole="BDF_UserProfile" ToRole="BDF_BloodRequest" />
+    <NavigationProperty Name="BDF_UserAccount" Relationship="BloodDonor_APIModel.FK_BDF_UserProfile_BDF_UserAccount" FromRole="BDF_UserProfile" ToRole="BDF_UserAccount" />
+    <NavigationProperty Name="MedicalReport_Images" Relationship="BloodDonor_APIModel.FK_MedicalReport_Images_BDF_UserProfile" FromRole="BDF_UserProfile" ToRole="MedicalReport_Images" />
+    <NavigationProperty Name="Questions" Relationship="BloodDonor_APIModel.FK_Questions_BDF_UserProfile" FromRole="BDF_UserProfile" ToRole="Question" />
+    <NavigationProperty Name="UserProfile_Images" Relationship="BloodDonor_APIModel.FK_UserProfile_Image_BDF_UserProfile" FromRole="BDF_UserProfile" ToRole="UserProfile_Images" />
+  </EntityType>
+  <Association Name="FK_BDF_BloodRequest_BDF_UserProfile">
+    <End Type="BloodDonor_APIModel.BDF_UserProfile" Role="BDF_UserProfile" Multiplicity="0..1" />
+    <End Type="BloodDonor_APIModel.BDF_BloodRequest" Role="BDF_BloodRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="BDF_BloodRequest">
+        <PropertyRef Name="SenderAccount_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BDF_BloodRequest_BDF_UserProfile1">
+    <End Type="BloodDonor_APIModel.BDF_UserProfile" Role="BDF_UserProfile" Multiplicity="0..1" />
+    <End Type="BloodDonor_APIModel.BDF_BloodRequest" Role="BDF_BloodRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="BDF_BloodRequest">
+        <PropertyRef Name="ReceiverAccount_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BDF_UserProfile_BDF_UserAccount">
+    <End Type="BloodDonor_APIModel.BDF_UserAccount" Role="BDF_UserAccount" Multiplicity="1" />
+    <End Type="BloodDonor_APIModel.BDF_UserProfile" Role="BDF_UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserAccount">
+        <PropertyRef Name="AccountID" />
+      </Principal>
+      <Dependent Role="BDF_UserProfile">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalReport_Images_BDF_UserProfile">
+    <End Type="BloodDonor_APIModel.BDF_UserProfile" Role="BDF_UserProfile" Multiplicity="0..1" />
+    <End Type="BloodDonor_APIModel.MedicalReport_Images" Role="MedicalReport_Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="MedicalReport_Images">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_BDF_UserProfile">
+    <End Type="BloodDonor_APIModel.BDF_UserProfile" Role="BDF_UserProfile" Multiplicity="0..1" />
+    <End Type="BloodDonor_APIModel.Question" Role="Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserProfile_Images">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfileID" Type="Int64" Nullable="false" />
+    <Property Name="ImageData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ImageSize" Type="Int32" />
+    <NavigationProperty Name="BDF_UserProfile" Relationship="BloodDonor_APIModel.FK_UserProfile_Image_BDF_UserProfile" FromRole="UserProfile_Images" ToRole="BDF_UserProfile" />
+  </EntityType>
+  <Association Name="FK_UserProfile_Image_BDF_UserProfile">
+    <End Type="BloodDonor_APIModel.BDF_UserProfile" Role="BDF_UserProfile" Multiplicity="1" />
+    <End Type="BloodDonor_APIModel.UserProfile_Images" Role="UserProfile_Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="UserProfile_Images">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

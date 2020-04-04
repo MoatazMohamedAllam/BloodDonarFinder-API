@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BloodDonor_APIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BDF_BloodRequest">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SenderAccount_id" Type="bigint" />
+    <Property Name="ReceiverAccount_id" Type="bigint" />
+    <Property Name="BloodRequireAddress" Type="varchar" MaxLength="50" />
+    <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
+    <Property Name="AppDate" Type="date" />
+    <Property Name="ReqDate" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="10" />
+    <Property Name="No_Of_Days" Type="int" />
+    <Property Name="RequestType" Type="varchar" MaxLength="50" />
+    <Property Name="IsOperationDone" Type="bit" />
+  </EntityType>
+  <EntityType Name="BDF_UserAccount">
+    <Key>
+      <PropertyRef Name="AccountID" />
+    </Key>
+    <Property Name="AccountID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RoleID" Type="tinyint" />
+    <Property Name="Email" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="BDF_UserProfile">
+    <Key>
+      <PropertyRef Name="UserProfileID" />
+    </Key>
+    <Property Name="UserProfileID" Type="bigint" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="150" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="150" />
+    <Property Name="DOB" Type="varchar" MaxLength="150" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="DonationFrequency" Type="int" />
+    <Property Name="ImageURL" Type="varchar(max)" />
+    <Property Name="BloodGroup" Type="nvarchar" MaxLength="20" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="70" />
+    <Property Name="User_Id" Type="bigint" Nullable="false" />
+    <Property Name="govern_name" Type="nvarchar" MaxLength="200" />
+    <Property Name="city_name" Type="nvarchar" MaxLength="200" />
+    <Property Name="MedicalReport_ImgURL" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="BDF_UserRole">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicalReport_Images">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfileID" Type="bigint" />
+    <Property Name="ImagePath" Type="nvarchar(max)" />
+    <Property Name="MedicalReport_Status" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Questions">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="User_Question" Type="nvarchar(max)" />
+    <Property Name="Answer" Type="nvarchar(max)" />
+    <Property Name="receiverRole" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="UserProfile_Images">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfileID" Type="bigint" Nullable="false" />
+    <Property Name="ImageData" Type="nvarchar(max)" />
+    <Property Name="ImageName" Type="varchar" MaxLength="50" />
+    <Property Name="ImageSize" Type="int" />
+  </EntityType>
+  <Association Name="FK_BDF_BloodRequest_BDF_UserProfile">
+    <End Role="BDF_UserProfile" Type="Self.BDF_UserProfile" Multiplicity="0..1" />
+    <End Role="BDF_BloodRequest" Type="Self.BDF_BloodRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="BDF_BloodRequest">
+        <PropertyRef Name="SenderAccount_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BDF_BloodRequest_BDF_UserProfile1">
+    <End Role="BDF_UserProfile" Type="Self.BDF_UserProfile" Multiplicity="0..1" />
+    <End Role="BDF_BloodRequest" Type="Self.BDF_BloodRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="BDF_BloodRequest">
+        <PropertyRef Name="ReceiverAccount_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BDF_UserAccount_BDF_UserRole">
+    <End Role="BDF_UserRole" Type="Self.BDF_UserRole" Multiplicity="0..1" />
+    <End Role="BDF_UserAccount" Type="Self.BDF_UserAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserRole">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="BDF_UserAccount">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BDF_UserProfile_BDF_UserAccount">
+    <End Role="BDF_UserAccount" Type="Self.BDF_UserAccount" Multiplicity="1" />
+    <End Role="BDF_UserProfile" Type="Self.BDF_UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserAccount">
+        <PropertyRef Name="AccountID" />
+      </Principal>
+      <Dependent Role="BDF_UserProfile">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalReport_Images_BDF_UserProfile">
+    <End Role="BDF_UserProfile" Type="Self.BDF_UserProfile" Multiplicity="0..1" />
+    <End Role="MedicalReport_Images" Type="Self.MedicalReport_Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="MedicalReport_Images">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_BDF_UserProfile">
+    <End Role="BDF_UserProfile" Type="Self.BDF_UserProfile" Multiplicity="0..1" />
+    <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_Image_BDF_UserProfile">
+    <End Role="BDF_UserProfile" Type="Self.BDF_UserProfile" Multiplicity="1" />
+    <End Role="UserProfile_Images" Type="Self.UserProfile_Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BDF_UserProfile">
+        <PropertyRef Name="UserProfileID" />
+      </Principal>
+      <Dependent Role="UserProfile_Images">
+        <PropertyRef Name="ProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BloodDonor_APIModelStoreContainer">
+    <EntitySet Name="BDF_BloodRequest" EntityType="Self.BDF_BloodRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BDF_UserAccount" EntityType="Self.BDF_UserAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BDF_UserProfile" EntityType="Self.BDF_UserProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BDF_UserRole" EntityType="Self.BDF_UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedicalReport_Images" EntityType="Self.MedicalReport_Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile_Images" EntityType="Self.UserProfile_Images" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BDF_BloodRequest_BDF_UserProfile" Association="Self.FK_BDF_BloodRequest_BDF_UserProfile">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="BDF_BloodRequest" EntitySet="BDF_BloodRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BDF_BloodRequest_BDF_UserProfile1" Association="Self.FK_BDF_BloodRequest_BDF_UserProfile1">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="BDF_BloodRequest" EntitySet="BDF_BloodRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BDF_UserAccount_BDF_UserRole" Association="Self.FK_BDF_UserAccount_BDF_UserRole">
+      <End Role="BDF_UserRole" EntitySet="BDF_UserRole" />
+      <End Role="BDF_UserAccount" EntitySet="BDF_UserAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BDF_UserProfile_BDF_UserAccount" Association="Self.FK_BDF_UserProfile_BDF_UserAccount">
+      <End Role="BDF_UserAccount" EntitySet="BDF_UserAccount" />
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalReport_Images_BDF_UserProfile" Association="Self.FK_MedicalReport_Images_BDF_UserProfile">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="MedicalReport_Images" EntitySet="MedicalReport_Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_BDF_UserProfile" Association="Self.FK_Questions_BDF_UserProfile">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_Image_BDF_UserProfile" Association="Self.FK_UserProfile_Image_BDF_UserProfile">
+      <End Role="BDF_UserProfile" EntitySet="BDF_UserProfile" />
+      <End Role="UserProfile_Images" EntitySet="UserProfile_Images" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
